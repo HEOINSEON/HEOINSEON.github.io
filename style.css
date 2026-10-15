@@ -65,3 +65,13 @@ table{border-collapse:collapse;width:100%;min-width:560px;font-size:.88rem;backg
 th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
 th{background:var(--accent-soft)}
 .note{background:var(--accent-soft);border-radius:10px;padding:12px 16px;font-size:.92rem}
+/* 도구함 입장 */
+.gate{margin:32px 0 8px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 24px;text-align:center}
+.gate h2{margin:0 0 6px;font-size:1.25rem}
+.gate p{margin:0 0 14px;color:var(--muted);font-size:.93rem}
+.gate form{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.gate input{font:inherit;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:min(260px,100%)}
+.gate button{font:inherit;font-weight:700;padding:10px 20px;border:0;border-radius:10px;background:var(--accent);color:#fff;cursor:pointer}
+.gate-msg{min-height:1.4em;margin:12px 0 4px!important;color:var(--fb)!important}
+.gate-note{font-size:.85rem!important;margin:0!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
