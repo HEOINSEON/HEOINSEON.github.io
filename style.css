@@ -1,0 +1,67 @@
+:root{
+  --bg:#fbf8f2; --surface:#ffffff; --ink:#1f1d1a; --muted:#6b655c; --line:#e8e1d4;
+  --accent:#c77d12; --accent-soft:#fdf0d8;
+  --gs:#1e7a46; --gs-bg:#e3f4ea; --fb:#b5520f; --fb-bg:#fde9da;
+  --ai:#5b3fb8; --ai-bg:#ece7fb; --ls:#4a5868; --ls-bg:#e8edf2;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#191714; --surface:#221f1b; --ink:#f1ece4; --muted:#a8a095; --line:#38332c;
+    --accent:#f0a83a; --accent-soft:#3a2e1a;
+    --gs:#7fd3a2; --gs-bg:#1f3428; --fb:#f4a774; --fb-bg:#3b271a;
+    --ai:#b9a6f5; --ai-bg:#2d2547; --ls:#b4c0cc; --ls-bg:#2a3038;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;
+  line-height:1.65;word-break:keep-all}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+.hero{border-bottom:1px solid var(--line);background:var(--surface);padding:48px 0 32px}
+.eyebrow{margin:0;color:var(--accent);font-weight:700;font-size:.9rem;letter-spacing:.02em}
+.hero h1{margin:.2em 0 .3em;font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.2}
+.lead{max-width:640px;color:var(--muted);margin:0}
+.quick{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.quick a{text-decoration:none;padding:8px 14px;border:1px solid var(--line);border-radius:999px;font-size:.92rem;background:var(--bg)}
+.quick a:hover{border-color:var(--accent);color:var(--accent)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin:28px 0 8px;padding:14px 16px;
+  background:var(--surface);border:1px solid var(--line);border-radius:12px;font-size:.85rem;color:var(--muted)}
+.legend strong{color:var(--ink)}
+.group{margin-top:36px}
+.group h2{font-size:1.25rem;margin:0 0 14px}
+.group h2 small{color:var(--muted);font-weight:500;font-size:.85rem;margin-left:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.card{display:flex;flex-direction:column;gap:6px;text-decoration:none;background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;padding:16px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.card h3{margin:0;font-size:1rem;line-height:1.4}
+.card p{margin:0;color:var(--muted);font-size:.88rem;flex:1}
+.card .url{font-size:.78rem;color:var(--muted);font-family:ui-monospace,Menlo,monospace}
+.badge{flex-shrink:0;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.b-gs{color:var(--gs);background:var(--gs-bg)} .b-fb{color:var(--fb);background:var(--fb-bg)}
+.b-ai{color:var(--ai);background:var(--ai-bg)} .b-ls{color:var(--ls);background:var(--ls-bg)}
+.panel{margin-top:48px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px}
+.panel h2{margin:0 0 12px;font-size:1.25rem}
+.panel h3{font-size:1rem;margin:0 0 6px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.panel ul,.panel ol{margin:0;padding-left:1.2em;color:var(--muted);font-size:.93rem}
+.contact{display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;margin:16px 0 0}
+.contact dt{font-weight:700} .contact dd{margin:0}
+.foot{margin-top:56px;border-top:1px solid var(--line);padding:24px 0 40px;font-size:.9rem;color:var(--muted)}
+.foot .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between}
+.foot a{color:var(--ink)}
+/* 처리방침 문서 */
+.doc{max-width:820px}
+.doc h2{font-size:1.15rem;margin:36px 0 10px;padding-top:12px;border-top:1px solid var(--line)}
+.doc p,.doc li{font-size:.95rem}
+.doc .meta{color:var(--muted);font-size:.88rem}
+.toc{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:24px 0}
+.toc ol{margin:0;padding-left:1.3em;columns:2;column-gap:28px;font-size:.92rem}
+@media (max-width:560px){.toc ol{columns:1}}
+.tbl{width:100%;overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.88rem;background:var(--surface)}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--accent-soft)}
+.note{background:var(--accent-soft);border-radius:10px;padding:12px 16px;font-size:.92rem}
