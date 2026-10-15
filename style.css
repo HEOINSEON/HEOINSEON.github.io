@@ -75,3 +75,6 @@ th{background:var(--accent-soft)}
 .gate-msg{min-height:1.4em;margin:12px 0 4px!important;color:var(--fb)!important}
 .gate-note{font-size:.85rem!important;margin:0!important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.relock{display:flex;justify-content:flex-end;margin:24px 0 0}
+.relock button{font:inherit;font-size:.9rem;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);cursor:pointer}
+.relock button:hover{border-color:var(--accent);color:var(--accent)}
