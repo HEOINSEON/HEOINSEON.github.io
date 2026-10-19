@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>지속가능한 발전목표 (SDGs)</title>
+<meta name="description" content="카드를 눌러 지속가능한 발전목표 17가지와 관련 권리를 알아보는 수업용 웹사이트">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+:root{--ink:#1f2937;--muted:#4b5563;--paper:#ffffff;--bg1:#fffbeb;--bg2:#fdf2f8}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:var(--ink);
+  background:linear-gradient(135deg,var(--bg1),#fff7ed 50%,var(--bg2));word-break:keep-all}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 16px 48px}
+header{text-align:center;margin-bottom:28px}
+h1{margin:0;font-size:clamp(26px,5vw,40px);font-weight:900;letter-spacing:-.5px}
+.lead{margin:10px 0 0;color:var(--muted);font-size:clamp(14px,2.4vw,17px)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media (max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.grid{grid-template-columns:repeat(2,1fr);gap:12px}}
+.card{display:flex;perspective:1200px;border:0;padding:0;background:none;font:inherit;color:inherit;cursor:pointer;text-align:center;min-width:0}
+.inner{flex:1;width:100%;display:grid;transition:transform .6s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d;min-height:240px}
+.card.open .inner{transform:rotateY(180deg)}
+.face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;box-shadow:0 8px 22px rgba(0,0,0,.10);min-width:0}
+.front{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#fff;padding:24px 12px;background:linear-gradient(135deg,var(--c1),var(--c2))}
+.front .emo{font-size:clamp(40px,7vw,58px);line-height:1.1;margin-bottom:8px}
+.front b{font-size:clamp(17px,2.6vw,21px);font-weight:900}
+.front span{font-size:clamp(13px,2vw,16px);font-weight:500;opacity:.95}
+.back{transform:rotateY(180deg);background:var(--paper);padding:20px 16px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.back .ttl{font-size:clamp(15px,2.2vw,17px);font-weight:900;color:var(--c2)}
+.back .emo{font-size:34px;line-height:1.1}
+.back .desc{font-size:clamp(12.5px,1.8vw,14px);line-height:1.6;color:#374151}
+.rights{width:100%;margin-top:4px;border-radius:10px;padding:10px 8px;font-size:clamp(12px,1.7vw,13px);line-height:1.6;color:var(--c2);
+  background:color-mix(in srgb,var(--c1) 12%,#fff)}
+.rights strong{display:block;color:#1f2937;font-size:13px}
+.card:hover .front{filter:brightness(1.05)}
+.card:focus-visible{outline:3px solid #1f2937;outline-offset:4px;border-radius:16px}
+.tools{display:flex;justify-content:center;gap:8px;margin-top:28px}
+.tools button{font:inherit;font-size:14px;font-weight:700;border:1px solid #e5e7eb;background:#fff;color:var(--ink);border-radius:999px;padding:8px 16px;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🌏 지속가능한 발전목표 (SDGs)</h1>
+    <p class="lead">카드를 클릭하여 각 목표에 대해 자세히 알아보세요!</p>
+  </header>
+  <main class="grid" id="grid" aria-label="지속가능한 발전목표 17가지"></main>
+  <div class="tools"><button type="button" id="closeAll">모든 카드 덮기</button></div>
+</div>
+<script>
+const SDGS = [
+ ["빈곤 종식","🏠","🏘️","모든 형태의 빈곤을 전 세계에서 종식시키는 것을 목표로 합니다.",["인간다운 생활을 할 권리","적절한 주거를 누릴 권리","기본적인 생활을 보장받을 권리"],"#f87171","#dc2626"],
+ ["기아 종식","🌾","🍽️","기아를 종식하고 식량 안보를 달성하며 지속가능한 농업을 증진합니다.",["충분한 음식을 섭취할 권리","영양가 있는 식품에 접근할 권리","굶주림으로부터 자유로울 권리"],"#facc15","#ea580c"],
+ ["건강과 복지","🏥","💊","모든 연령층을 위한 건강한 삶을 보장하고 복지를 증진합니다.",["건강하게 살 권리","의료 서비스를 받을 권리","안전한 환경에서 살 권리"],"#4ade80","#16a34a"],
+ ["양질의 교육","📚","🎓","포용적이고 공평한 양질의 교육을 보장하고 평생학습 기회를 증진합니다.",["배움의 권리","교육받을 권리","지식에 접근할 권리"],"#60a5fa","#2563eb"],
+ ["성평등","⚖️","👭","성평등을 달성하고 모든 여성과 소녀의 권한을 강화합니다.",["성별에 관계없이 평등할 권리","차별받지 않을 권리","동등한 기회를 가질 권리"],"#c084fc","#db2777"],
+ ["깨끗한 물과 위생","💧","🚿","모든 사람이 물과 위생에 접근할 수 있도록 하고 지속가능한 관리를 보장합니다.",["깨끗한 물을 마실 권리","위생적인 환경에서 살 권리","기본적인 위생시설을 이용할 권리"],"#22d3ee","#0e7490"],
+ ["청정에너지","⚡","🌞","모든 사람이 적정가격의 신뢰할 수 있고 지속가능한 현대적 에너지에 접근할 수 있도록 보장합니다.",["에너지를 이용할 권리","깨끗한 환경에서 살 권리","지속가능한 미래를 누릴 권리"],"#eab308","#c2410c"],
+ ["양질의 일자리와 경제성장","💼","🏢","지속적이고 포용적이며 지속가능한 경제성장과 완전하고 생산적인 고용, 모든 사람을 위한 양질의 일자리를 증진합니다.",["일할 권리","공정한 임금을 받을 권리","안전한 근무환경에서 일할 권리"],"#818cf8","#6d28d9"],
+ ["산업, 혁신, 인프라","🏗️","🔬","회복력 있는 인프라를 구축하고 포용적이고 지속가능한 산업화를 증진하며 혁신을 장려합니다.",["기술 발전의 혜택을 누릴 권리","인프라 서비스를 이용할 권리","혁신에 참여할 권리"],"#6b7280","#374151"],
+ ["불평등 감소","🤝","⚖️","국가 내 및 국가 간 불평등을 감소시킵니다.",["평등하게 대우받을 권리","차별받지 않을 권리","공정한 기회를 가질 권리"],"#fb7185","#be123c"],
+ ["지속가능한 도시와 공동체","🏙️","🌆","포용적이고 안전하며 회복력 있고 지속가능한 도시와 거주지를 조성합니다.",["안전한 도시에서 살 권리","깨끗한 환경을 누릴 권리","공공서비스를 이용할 권리"],"#fbbf24","#c2410c"],
+ ["지속가능한 소비와 생산","♻️","🌱","지속가능한 소비와 생산 패턴을 보장합니다.",["지속가능한 환경에서 살 권리","미래 세대를 위한 환경을 보존할 권리","책임감 있는 소비를 할 권리"],"#34d399","#047857"],
+ ["기후변화 대응","🌡️","🌍","기후변화와 그 영향에 맞서기 위한 긴급 조치를 취합니다.",["안전한 기후에서 살 권리","환경재해로부터 보호받을 권리","지속가능한 미래를 누릴 권리"],"#2dd4bf","#0f766e"],
+ ["해양생태계 보전","🐠","🌊","지속가능한 발전을 위해 바다, 해양, 해양자원을 보전하고 지속가능하게 이용합니다.",["깨끗한 바다를 누릴 권리","해양자원의 혜택을 받을 권리","건강한 해양환경에서 살 권리"],"#3b82f6","#4338ca"],
+ ["육상생태계 보전","🌳","🦋","육상생태계를 보호하고 복원하며 지속가능하게 이용하고, 산림을 지속가능하게 관리하며, 사막화를 방지하고, 토지 황폐화를 중단 및 역전시키고, 생물다양성 손실을 중단시킵니다.",["자연환경을 누릴 권리","생물다양성의 혜택을 받을 권리","건강한 생태계에서 살 권리"],"#22c55e","#047857"],
+ ["평화와 정의","🕊️","⚖️","지속가능한 발전을 위한 평화롭고 포용적인 사회를 증진하고, 모든 사람에게 정의에 대한 접근을 제공하며, 모든 수준에서 효과적이고 책임감 있으며 포용적인 제도를 구축합니다.",["평화롭게 살 권리","정의를 받을 권리","폭력으로부터 보호받을 권리"],"#64748b","#334155"],
+ ["목표달성을 위한 파트너십","🤝","🌐","지속가능한 발전을 위한 이행수단을 강화하고 글로벌 파트너십을 활성화합니다.",["국제협력의 혜택을 받을 권리","글로벌 공동체에 참여할 권리","지속가능한 발전에 기여할 권리"],"#a855f7","#7e22ce"]
+];
+const grid = document.getElementById("grid");
+grid.innerHTML = SDGS.map(([t,f,b,d,r,c1,c2],i) => `
+  <button type="button" class="card" style="--c1:${c1};--c2:${c2}" aria-pressed="false" aria-label="SDG ${i+1} ${t} 카드 뒤집기">
+    <span class="inner">
+      <span class="face front" aria-hidden="false"><span class="emo">${f}</span><b>SDG ${i+1}</b><span>${t}</span></span>
+      <span class="face back" aria-hidden="true">
+        <span class="ttl">${t}</span><span class="emo">${b}</span><span class="desc">${d}</span>
+        <span class="rights"><strong>관련 권리:</strong>${r.map(x=>"• "+x).join("<br>")}</span>
+      </span>
+    </span>
+  </button>`).join("");
+function setOpen(card, open){
+  card.classList.toggle("open", open);
+  card.setAttribute("aria-pressed", String(open));
+  card.querySelector(".front").setAttribute("aria-hidden", String(open));
+  card.querySelector(".back").setAttribute("aria-hidden", String(!open));
+}
+grid.addEventListener("click", e => { const c = e.target.closest(".card"); if (c) setOpen(c, !c.classList.contains("open")); });
+document.getElementById("closeAll").addEventListener("click", () => grid.querySelectorAll(".card").forEach(c => setOpen(c, false)));
+</script>
+</body>
+</html>
