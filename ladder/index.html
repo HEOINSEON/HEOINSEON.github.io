@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="개인의 실천은 어떻게 제도의 변화로 이어질까? 사다리를 오른 세 사례를 읽고 한 칸 위로 밀어 올린 힘을 찾는 수업용 카드">
+<meta property="og:title" content="실천의 사다리">
+<meta property="og:description" content="개인의 실천은 어떻게 제도의 변화로 이어질까? 사다리를 오른 세 사례를 읽고 한 칸 위로 밀어 올린 힘을 찾는 수업용 카드">
+<title>실천의 사다리</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='10' y='6' width='44' height='52' rx='6' fill='%230F6B5F'/%3E%3Crect x='18' y='16' width='28' height='4' rx='2' fill='%23fff'/%3E%3Crect x='18' y='26' width='28' height='4' rx='2' fill='%23fff'/%3E%3Crect x='18' y='36' width='18' height='4' rx='2' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: a case-file desk — a short brief, then an evidence board of 8 numbered cards; tapping one opens the full exhibit sheet. */
+:root{
+  --bg:#EEF2F1; --paper:#FFFFFF; --ink:#1E2B2A; --muted:#5B6B69; --line:#CBD6D4;
+  --accent:#0F6B5F; --accent-soft:#D9ECE8; --stamp:#C0582A; --stamp-soft:#F6E3D8;
+  --done:#2E7D4F; --shade:rgba(15,30,28,.45);
+  --display:"Black Han Sans","IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121A19; --paper:#1B2524; --ink:#E6EEEC; --muted:#9FB0AD; --line:#2E3C3A;
+  --accent:#5CC2B1; --accent-soft:#1F3632; --stamp:#F09A6E; --stamp-soft:#3A2820;
+  --done:#6FCB94; --shade:rgba(0,0,0,.6); color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#121A19; --paper:#1B2524; --ink:#E6EEEC; --muted:#9FB0AD; --line:#2E3C3A;
+  --accent:#5CC2B1; --accent-soft:#1F3632; --stamp:#F09A6E; --stamp-soft:#3A2820;
+  --done:#6FCB94; --shade:rgba(0,0,0,.6); color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:28px 48px}
+header{display:grid;gap:10px;margin-bottom:22px}
+.eyebrow{font-size:13px;letter-spacing:.12em;color:var(--accent);font-weight:700}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(30px,6vw,44px);line-height:1.15;margin:0;text-wrap:balance}
+.lead{margin:0;color:var(--muted);max-width:62ch}
+.brief{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:6px 0 24px}
+.brief div{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-width:0}
+.brief b{display:block;font-size:13px;color:var(--accent);letter-spacing:.04em}
+.mine{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px}
+.mine span{font-weight:700;font-size:14px;margin-right:4px}
+.pick{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:4px 12px;cursor:pointer;min-width:40px}
+.pick[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+.hint{font-size:13px;color:var(--muted)}
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.card{position:relative;text-align:left;font:inherit;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 16px 14px;cursor:pointer;display:grid;gap:6px;align-content:start;min-width:0;transition:transform .15s ease,border-color .15s ease}
+.card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.card:focus-visible,.pick:focus-visible,.btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.card.is-mine{border:2px solid var(--accent);background:linear-gradient(var(--accent-soft),var(--accent-soft)) top/100% 6px no-repeat,var(--paper)}
+.num{font-family:var(--display);font-size:40px;line-height:1;color:var(--accent)}
+.ttl{font-weight:700;font-size:17px;line-height:1.35;text-wrap:balance}
+.meta{font-size:13px;color:var(--muted)}
+.tag{justify-self:start;font-size:12px;font-weight:700;color:var(--stamp);background:var(--stamp-soft);border-radius:4px;padding:1px 8px;letter-spacing:.02em}
+.read{position:absolute;top:12px;right:12px;font-size:12px;font-weight:700;color:var(--done)}
+.teacher-only{display:none}
+body.teacher .teacher-only{display:block}
+.ans{font-size:13px;border-top:1px dashed var(--line);padding-top:6px;margin-top:4px;color:var(--stamp)}
+/* exhibit sheet */
+.sheet{position:fixed;inset:0;background:var(--shade);display:grid;place-items:center;padding:16px;z-index:10}
+.paper{background:var(--paper);color:var(--ink);border-radius:14px;max-width:640px;width:100%;max-height:calc(100% - 32px);overflow:auto;padding:22px 22px 18px;border:1px solid var(--line);display:grid;gap:12px}
+.sheet-head{display:flex;gap:14px;align-items:flex-start}
+.sheet-head .num{font-size:56px}
+.sheet-head h2{margin:2px 0 0;font-size:22px;line-height:1.3;text-wrap:balance}
+.facts{margin:0;padding-left:1.1em;display:grid;gap:6px}
+.q{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-weight:700}
+.q small{display:block;font-weight:700;font-size:12px;letter-spacing:.08em;color:var(--accent)}
+.todo{border:1px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:14px}
+.todo b{color:var(--accent)}
+.todo ol{margin:4px 0 0;padding-left:1.2em}
+.src{font-size:12px;color:var(--muted)}
+.src a{color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center}
+.btn{font:inherit;font-size:14px;font-weight:700;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:8px 14px;cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+/* hint */
+.hintbox{border-top:1px dashed var(--line);padding-top:12px;display:grid;gap:10px}
+.btn.hint-btn{justify-self:start;background:var(--stamp-soft);border-color:var(--stamp);color:var(--stamp)}
+.hint-text{background:var(--stamp-soft);border-left:4px solid var(--stamp);border-radius:8px;padding:10px 14px;font-weight:700}
+.hint-text small{display:block;font-size:12px;letter-spacing:.08em;color:var(--stamp)}
+footer{margin-top:28px;font-size:12px;color:var(--muted);display:grid;gap:4px}
+@media (prefers-reduced-motion: reduce){.card{transition:none}.card:hover{transform:none}}
+</style>
+<style>[hidden]{display:none!important} img{max-width:100%}</style>
+<style>
+.ladder{display:grid;gap:0;margin:4px 0 26px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px}
+.ladder h2{margin:0 0 10px;font-size:15px;color:var(--accent);letter-spacing:.06em}
+.rung{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;border:2px solid var(--line);border-radius:10px;padding:10px 14px;background:var(--bg)}
+.rung .rn{font-family:var(--display);font-size:30px;line-height:1;color:var(--accent);text-align:center}
+.rung b{display:block;font-size:17px}
+.rung span{font-size:14px;color:var(--muted)}
+.rung.on{border-color:var(--stamp);background:var(--stamp-soft)}
+.push{display:flex;align-items:center;gap:10px;padding:6px 0 6px 18px;font-size:14px;color:var(--stamp);font-weight:700}
+.push:before{content:'▲';font-size:12px}
+.band{margin-top:26px;background:var(--paper);border:2px dashed var(--accent);border-radius:12px;padding:14px 16px;display:grid;gap:10px}
+.band p{margin:0;font-weight:700}
+.band .reveal{font-size:17px;color:var(--accent);background:var(--accent-soft);border-radius:8px;padding:10px 12px;text-align:center}
+.pickrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pickrow small{font-weight:700;font-size:13px;margin-right:4px;min-width:64px}
+.minilad{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.minilad div{border:1px solid var(--line);border-radius:6px;padding:4px 6px;font-size:12px;text-align:center;color:var(--muted)}
+.minilad div.from{border-color:var(--accent);color:var(--accent);font-weight:700}
+.minilad div.to{background:var(--stamp-soft);border-color:var(--stamp);color:var(--stamp);font-weight:700}
+.minilad div.mid{background:var(--accent-soft)}
+.me{margin-top:14px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:10px}
+.me p{margin:0;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">도덕 · 결승선 · 삶으로 잇다</div>
+    <h1>실천의 사다리</h1>
+    <p class="lead">개인의 실천은 정말 의미가 없을까? 사다리를 오른 세 사람의 이야기를 읽고, 무엇이 한 칸 위로 밀어 올렸는지 찾아봅시다.</p>
+  </header>
+
+  <section class="brief" aria-label="활동 방법">
+    <div><b>1. 사다리 보기</b>네 칸과 칸 사이의 ▲를 보고 "무엇이 한 칸 위로 밀어 올릴까?"를 생각해요.</div>
+    <div><b>2. 사례 읽기</b>모둠이 맡은 카드를 열어 읽고, 출발 칸과 도착 칸을 눌러 표시해요.</div>
+    <div><b>3. 활동지에 쓰기</b>Step 3의 Q 칸에 몇 번째 칸에서 몇 번째 칸으로, 그 힘은 무엇이었는지 써요.</div>
+  </section>
+
+  <section class="ladder" aria-label="실천의 사다리">
+    <h2>실천의 사다리 · 위로 오를수록 바뀌는 범위가 넓어진다</h2>
+    <div class="rung" id="r4"><div class="rn">4</div><div><b>국가 · 세계</b><span>법 개정 요구, 기후소송, 국제 연대</span></div></div>
+    <div class="push">무엇이 밀어 올릴까?</div>
+    <div class="rung" id="r3"><div class="rn">3</div><div><b>지역 사회</b><span>구청 · 시청에 민원, 캠페인, 서명</span></div></div>
+    <div class="push">무엇이 밀어 올릴까?</div>
+    <div class="rung" id="r2"><div class="rn">2</div><div><b>우리 반 · 학교</b><span>기록을 모아 학생회에 제안한다</span></div></div>
+    <div class="push">무엇이 밀어 올릴까?</div>
+    <div class="rung" id="r1"><div class="rn">1</div><div><b>나</b><span>텀블러 · 대기 전력 끄기를 기록한다</span></div></div>
+  </section>
+
+  <main class="board" id="board" aria-label="사다리를 오른 사람들"></main>
+
+  <section class="band" aria-label="공통점 찾기">
+    <p>세 사람에게 공통으로 있었던 힘은 무엇이었을까? 모둠 발표를 마친 뒤 열어 보세요.</p>
+    <button type="button" class="btn" id="revealBtn" aria-expanded="false" aria-controls="revealText" style="justify-self:start">공통점 확인하기</button>
+    <div class="reveal" id="revealText" hidden>한 사람의 실천 → 기록과 증거 → 여럿의 목소리 → 규칙과 제도의 변화</div>
+  </section>
+
+  <section class="me" aria-label="나의 칸">
+    <p>그럼 나의 실천은 지금 몇 번째 칸에 있을까? 한 칸 위로 가려면 무엇이 필요할까?</p>
+    <div class="pickrow" id="meRow"><small>지금 내 칸</small></div>
+    <div class="hint" id="meHint">눌러서 표시하면 사다리에 색이 칠해져요. 이 질문을 들고 질문 스퍼트로 넘어가요.</div>
+  </section>
+
+  <footer>
+    <div>사례는 수업용으로 짧게 정리했습니다. ② 출처: 헌법재판소 2024. 8. 29. 결정, 2026. 8. 탄소중립기본법 개정 보도</div>
+    <div>고른 칸 표시는 이 기기에만 저장되며, 어디로도 전송되지 않습니다.</div>
+  </footer>
+</div>
+
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="paper" id="paper"></div>
+</div>
+
+<script>
+const RUNGS = ["나", "우리 반 · 학교", "지역 사회", "국가 · 세계"];
+const CARDS = [
+  { n:"①", title:"그레타 툰베리", meta:"스웨덴 · 2018년~",
+    facts:["2018년 8월, 15살 그레타는 학교에 가는 대신 혼자 스웨덴 국회 앞에서 ‘기후를 위한 등교 거부’ 팻말을 들었다.",
+           "매주 금요일 시위를 이어 가자 SNS를 통해 알려졌고, 전 세계 청소년이 함께하는 ‘미래를 위한 금요일’ 기후 행동으로 번졌다.",
+           "이듬해 그는 유엔 기후행동 정상회의에서 각국 지도자들 앞에서 연설했다."],
+    hint:"처음에는 몇 명이었나요? 무엇이 혼자의 시위를 세계의 목소리로 바꾸었을까요?" },
+  { n:"②", title:"한국 청소년 기후소송", meta:"대한민국 · 2020~2026년",
+    facts:["2020년 청소년들이 “정부의 온실가스 감축 목표가 미래 세대의 권리를 지키기에 부족하다”며 헌법소원을 냈다.",
+           "2024년 8월, 헌법재판소는 2031년 이후 감축 목표가 없는 탄소중립기본법 조항에 헌법불합치 결정을 내렸다.",
+           "2026년 8월, 국회는 법을 고쳐 2035 · 2040 · 2045년 감축 목표의 범위를 법에 담았다."],
+    hint:"청소년들은 어떤 방법으로 목소리를 냈나요? 그 목소리를 법이 받아들이게 한 것은 무엇이었을까요?" },
+  { n:"③", title:"프라이부르크 시민", meta:"독일 · 1970년대~",
+    facts:["1970년대, 가까운 마을에 원자력 발전소를 짓는 계획에 시민들이 반대하며 “그럼 우리 에너지는 어디서 얻을까?”를 묻기 시작했다.",
+           "시민들은 지붕에 태양광을 달고, 자전거와 대중교통으로 다니며 친환경 생활에 함께했다.",
+           "시 의회는 ‘에너지 자립 도시’를 목표로 에너지 절약형 주택과 대중교통 우선 정책을 펼쳤다."],
+    hint:"시민이 한 일과 시 의회가 한 일을 나누어 보세요. 둘 중 하나만 있었다면 도시가 바뀌었을까요?" }
+];
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+let marks = store.get("lad-marks", {});
+let me = store.get("lad-me", -1);
+const board = document.getElementById("board");
+const sheet = document.getElementById("sheet");
+const paper = document.getElementById("paper");
+let current = -1, lastFocus = null;
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function markText(i){
+  const m = marks[i]; if (!m || m.from == null || m.to == null) return "";
+  return `${m.from + 1}번째 칸 → ${m.to + 1}번째 칸`;
+}
+function renderBoard(){
+  board.innerHTML = CARDS.map((c,i) => `
+    <button type="button" class="card" id="card-${i}" data-i="${i}" aria-label="${c.n} ${esc(c.title)} 열기">
+      ${markText(i) ? `<span class="read">✓ ${markText(i)}</span>` : ""}
+      <span class="num">${c.n}</span>
+      <span class="ttl">${esc(c.title)}</span>
+      <span class="meta">${esc(c.meta)}</span>
+    </button>`).join("");
+}
+function mini(i){
+  const m = marks[i] || {};
+  return RUNGS.map((r,k) => {
+    let cls = "";
+    if (m.from != null && m.to != null && k > Math.min(m.from,m.to) && k < Math.max(m.from,m.to)) cls = "mid";
+    if (k === m.from) cls = "from";
+    if (k === m.to) cls = "to";
+    return `<div class="${cls}">${k+1}. ${r}</div>`;
+  }).join("");
+}
+function pickRow(i, key, label){
+  const m = marks[i] || {};
+  return `<div class="pickrow"><small>${label}</small>${RUNGS.map((r,k) =>
+    `<button type="button" class="pick" data-key="${key}" data-k="${k}" aria-pressed="${m[key] === k}">${k+1}</button>`).join("")}</div>`;
+}
+function openCard(i){
+  current = i; if (sheet.hidden) lastFocus = document.activeElement;
+  const c = CARDS[i];
+  paper.innerHTML = `
+    <div class="sheet-head"><span class="num">${c.n}</span>
+      <div style="min-width:0"><h2 id="sheetTitle">${esc(c.title)}</h2><div class="meta">${esc(c.meta)}</div></div></div>
+    <ul class="facts">${c.facts.map(f => `<li>${esc(f)}</li>`).join("")}</ul>
+    <div class="q"><small>생각할 질문</small>몇 번째 칸에서 몇 번째 칸으로 올라갔을까? 그 사람을 위로 밀어 올린 힘은 무엇이었을까?</div>
+    <div class="todo"><b>사다리에 표시하기</b>
+      ${pickRow(i,"from","출발 칸")}
+      ${pickRow(i,"to","도착 칸")}
+      <div class="minilad" style="margin-top:8px">${mini(i)}</div></div>
+    <div class="todo"><b>활동지 Step 3 Q 칸에 쓰기</b>
+      <ol><li>고른 사람과 오른 칸 (예: 1번째 칸 → 4번째 칸)</li><li>위로 밀어 올린 힘은 무엇이었나? (한 줄)</li></ol></div>
+    <div class="nav">
+      <button type="button" class="btn" id="prevBtn">← 이전 사례</button>
+      <button type="button" class="btn primary" id="closeBtn">닫기</button>
+      <button type="button" class="btn" id="nextBtn">다음 사례 →</button>
+    </div>
+    <div class="hintbox">
+      <button type="button" class="btn hint-btn" id="hintBtn" aria-expanded="false" aria-controls="hintText">💡 힌트 보기</button>
+      <div class="hint-text" id="hintText" hidden><small>힌트 ${c.n}</small>${esc(c.hint)}</div>
+    </div>`;
+  sheet.hidden = false;
+  const cb = document.getElementById("closeBtn"); if (cb) cb.focus();
+}
+function closeCard(){ sheet.hidden = true; current = -1; renderBoard(); if (lastFocus) lastFocus.focus(); }
+board.addEventListener("click", e => { const b = e.target.closest(".card"); if (b) openCard(+b.dataset.i); });
+sheet.addEventListener("click", e => {
+  const p = e.target.closest(".pick");
+  if (p){ const m = marks[current] || {}; m[p.dataset.key] = +p.dataset.k; marks[current] = m; store.set("lad-marks", marks);
+    const y = paper.scrollTop; openCard(current); paper.scrollTop = y; return; }
+  if (e.target === sheet || e.target.id === "closeBtn") closeCard();
+  else if (e.target.id === "prevBtn") openCard((current + CARDS.length - 1) % CARDS.length);
+  else if (e.target.id === "nextBtn") openCard((current + 1) % CARDS.length);
+  else if (e.target.closest("#hintBtn")) {
+    const btn = document.getElementById("hintBtn"), box = document.getElementById("hintText");
+    const show = box.hidden; box.hidden = !show;
+    btn.setAttribute("aria-expanded", String(show));
+    btn.textContent = show ? "💡 힌트 닫기" : "💡 힌트 보기";
+  }
+});
+document.addEventListener("keydown", e => {
+  if (sheet.hidden) return;
+  if (e.key === "Escape") closeCard();
+  if (e.key === "ArrowRight") openCard((current + 1) % CARDS.length);
+  if (e.key === "ArrowLeft") openCard((current + CARDS.length - 1) % CARDS.length);
+});
+document.getElementById("revealBtn").addEventListener("click", e => {
+  const box = document.getElementById("revealText"); const show = box.hidden; box.hidden = !show;
+  e.target.setAttribute("aria-expanded", String(show)); e.target.textContent = show ? "공통점 닫기" : "공통점 확인하기";
+});
+const meRow = document.getElementById("meRow");
+function renderMe(){
+  meRow.innerHTML = "<small>지금 내 칸</small>" + RUNGS.map((r,k) =>
+    `<button type="button" class="pick" data-k="${k}" aria-pressed="${me === k}">${k+1}. ${r}</button>`).join("");
+  for (let k = 0; k < 4; k++) document.getElementById("r"+(k+1)).classList.toggle("on", k === me);
+  document.getElementById("meHint").textContent = me >= 0
+    ? `지금은 ${me+1}번째 칸. ${me < 3 ? (me+2)+"번째 칸으로 가려면 무엇이 필요할까? 이 질문을 들고 질문 스퍼트로!" : "가장 높은 칸! 이 실천을 누구와 함께 이어 갈까?"}`
+    : "눌러서 표시하면 사다리에 색이 칠해져요. 이 질문을 들고 질문 스퍼트로 넘어가요.";
+}
+meRow.addEventListener("click", e => { const b = e.target.closest(".pick"); if (!b) return; me = +b.dataset.k; store.set("lad-me", me); renderMe(); });
+renderBoard(); renderMe();
+</script>
+</body>
+</html>
